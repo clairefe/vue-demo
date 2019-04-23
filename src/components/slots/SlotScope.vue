@@ -1,6 +1,12 @@
 <template>
   <div>
-    {{user.firstName}}, {{user.lastName}}
+    <slot v-bind:user="user">
+      {{ user.lastName }}
+    </slot>
+    <br>
+    <slot name="other" v-bind:user="otherUser">
+      {{ otherUser.lastName }}
+    </slot>
   </div>
 </template>
 
@@ -10,8 +16,12 @@ export default {
   data () {
     return {
       user: {
-        firstName: 'component',
-        lastName: 'lily'
+        firstName: 'shi',
+        lastName: 'ce'
+      },
+      otherUser: {
+        firstName: 'other-shi',
+        lastName: 'other-ce'
       }
     }
   }

@@ -28,3 +28,11 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## 简单框架原理
+ 首先，我们需要理解MVVM框架，其实MVVM就是Model-View-ViewModel
+同时还有MVC框架，MVC就是Model-View-Controller
+其实对于前端而言，并没有严格意义上MVC框架，而我们以VUE作为MVVM框架的代表来进行表述
+
+Model就是数据层，View是视图，ViewModel是实现两者之间进行通信的桥梁。
+通过数据绑定实现Model-View渲染，通过事件监听从View反应到Model。

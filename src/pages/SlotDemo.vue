@@ -1,29 +1,46 @@
 <template>
   <div>
-    <h1>编译作用域</h1>
-    <slot-scope>
-      {{user.firstName}},{{user.lastName}}
-    </slot-scope>
-    <h1>具名slot</h1>
+    <h2 class="title">编译作用域</h2>
+    <slot-compiler-scope>
+      {{user.name}}
+    </slot-compiler-scope>
+    <h2 class="title">具名slot</h2>
     <slot-default>
       <template v-slot:header>
-        <h2>
+        <h3>
           具名slot demo header
-        </h2>
+        </h3>
       </template>
       <p>这个是demo的具体内容</p>
       <template v-slot:footer>
-        <h2>
+        <small>
           具名slot demo footer
-        </h2>
+        </small>
       </template>
     </slot-default>
+    <h2 class="title">slot作用域</h2>
+    <slot-scope>
+      <template v-slot="{ user }">
+        {{ user.firstName }}
+      </template>
+      <template v-slot:other="slotProps">
+        {{ slotProps.user.firstName }}
+      </template>
+    </slot-scope>
+    <h2 class="title">其他示例</h2>
+    <slot-other-instance :todos="todos">
+      <template #todo="{todo}">
+        {{todo.id}},{{todo.text}}
+      </template>
+    </slot-other-instance>
   </div>
 </template>
 
 <script>
-import SlotScope from '@/components/slots/SlotScope'
+import SlotCompilerScope from '@/components/slots/SlotCompilerScope'
 import SlotDefault from '@/components/slots/SlotDefault'
+import SlotScope from '@/components/slots/SlotScope'
+import SlotOtherInstance from '@/components/slots/SlotOtherInstance'
 
 const SlotDemo = {
   name: 'SlotDemo',
@@ -33,14 +50,33 @@ const SlotDemo = {
   data () {
     return {
       user: {
-        firstName: 'page',
-        lastName: 'lily'
-      }
+        name: 'page'
+      },
+      todos: [
+        {
+          id: 0,
+          text: '0'
+        },
+        {
+          id: 1,
+          text: '1'
+        },
+        {
+          id: 2,
+          text: '2'
+        },
+        {
+          id: 3,
+          text: '3'
+        }
+      ]
     }
   },
   components: {
     SlotDefault,
-    SlotScope
+    SlotCompilerScope,
+    SlotScope,
+    SlotOtherInstance
   },
   methods: {
 
@@ -48,3 +84,9 @@ const SlotDemo = {
 }
 export default SlotDemo
 </script>
+
+<style>
+  .title{
+    text-align: left;
+  }
+</style>
